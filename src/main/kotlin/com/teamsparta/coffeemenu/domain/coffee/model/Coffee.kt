@@ -1,38 +1,36 @@
 package com.teamsparta.coffeemenu.domain.coffee.model
 
 import com.teamsparta.coffeemenu.domain.coffee.dto.CoffeeResponse
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import com.teamsparta.coffeemenu.domain.coffeeOrderLine.model.CoffeeOrderLine
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "coffee")
-class Coffee(
-
-    @Column(name = "name")
+class Coffee (
+    @Column(name = "name", nullable = false)
     var name: String,
-
 
     @Column(name = "content")
     var content: String,
 
-    @Column(name = "price")
-    var price: Int
+    @Column(name = "price", nullable = false)
+    var price: Int,
+
+    @Column(name = "sell_count", nullable = false)
+    var sell_count: Int =0,
 
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id:Long? =null
+    var id: Long? = null
 }
 
-fun Coffee.toResponse():CoffeeResponse{
+fun Coffee.toResponse():CoffeeResponse {
     return CoffeeResponse(
-        id =id!!,
-        name =name,
-        content=content,
-        price = price
+        id = id!!,
+        name = name,
+        content = content,
+        price = price,
+        sell_count = sell_count
     )
 }
